@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    RED.nodes.registerType('soma-smart-shade-config', {
+        category: 'config',
+        defaults: {
+            port: { value: 3000, required: true, validate: RED.validators.number() },
+            protocol: { value: "http", required: true, validate: RED.validators.regex(/^((http)|(https))$/) },
+        },
+        label: function () {
+            return this.protocol + "://" + this.host + ":" + this.port;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="soma-smart-shade-config">
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="icon-tag"></i> Host</label>
+        <input type="text" id="node-config-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port"><i class="icon-tag"></i> Port</label>
+        <input type="text" id="node-config-input-port">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-protocol"><i class="icon-tag"></i> Protocol</label>
+        	
+        <input type="text" id="node-config-input-protocol">
+    </div>
+</script>
