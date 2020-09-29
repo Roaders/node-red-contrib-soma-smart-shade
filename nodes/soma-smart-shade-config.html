@@ -4,6 +4,7 @@
         defaults: {
             port: { value: 3000, required: true, validate: RED.validators.number() },
             protocol: { value: "http", required: true, validate: RED.validators.regex(/^((http)|(https))$/) },
+            host: {required: true}
         },
         label: function () {
             return this.protocol + "://" + this.host + ":" + this.port;
@@ -13,15 +14,15 @@
 
 <script type="text/html" data-template-name="soma-smart-shade-config">
     <div class="form-row">
-        <label for="node-config-input-host"><i class="icon-tag"></i> Host</label>
+        <label for="node-config-input-host"><i class="fa fa-globe"></i> Host</label>
         <input type="text" id="node-config-input-host">
     </div>
     <div class="form-row">
-        <label for="node-config-input-port"><i class="icon-tag"></i> Port</label>
+        <label for="node-config-input-port"><i class="fa fa-server"></i> Port</label>
         <input type="text" id="node-config-input-port">
     </div>
     <div class="form-row">
-        <label for="node-config-input-protocol"><i class="icon-tag"></i> Protocol</label>
+        <label for="node-config-input-protocol"><i class="fa fa-tag"></i> Protocol</label>
         	
         <input type="text" id="node-config-input-protocol">
     </div>

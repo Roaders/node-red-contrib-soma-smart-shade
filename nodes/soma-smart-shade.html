@@ -5,23 +5,96 @@
         outputs: 1,
         defaults: {
             name: {value:"soma-smart-shade"},
-            server: {value:"", type:"soma-smart-shade-config"},
+            server: {type:"soma-smart-shade-config", required: true},
+            blindid: {validate: function(value) {
+                const regExp = /^(\w{2}:){5}\w{2}$/;
+                return regExp.test(value);
+            }}
         },
         icon: "font-awesome/fa-automobile",
         label: function() {
-            return this.name||"soma-smart-shade";
+            return this.name || "soma-smart-shade";
+        },
+        oneditprepare: function() {
+            const blindIdInput = $('#node-input-blindid');
+            let blindsLoading = false;
+
+            $('#node-input-server').change((event) => {
+                this.loadBlinds();
+            })
+
+            this.resetBlinds = function(){
+                const serverInput = $('#node-input-server')[0];
+                const configNode = RED.nodes.node(serverInput.value);
+
+                if(configNode == null){
+                    blindIdInput.empty();
+                    blindIdInput.prop('disabled', true);
+                    blindIdInput.append(new Option("Select server..."));
+                    return;
+                } else {
+                    blindIdInput.prop('disabled', true);
+                    blindIdInput.empty();
+                    blindIdInput.append(new Option("Loading..."));
+                }
+
+                return configNode;
+            }
+
+            this.loadBlinds = () => {
+                const configNode = this.resetBlinds();
+
+                if(configNode == null || blindsLoading){
+                    return;
+                }
+
+                const devicesUrl = `soma-smart-shade-devices?protocol=${encodeURIComponent(configNode.protocol)}&host=${encodeURIComponent(configNode.host)}&port=${encodeURIComponent(configNode.port)}`;
+                blindsLoading = true;
+                $.getJSON(devicesUrl, (data) => {
+                    blindsLoading = false;
+                    blindIdInput.prop('disabled', false);
+                    blindIdInput.empty();
+
+                    const defaultOption = new Option("Select blind...", "", true, true);
+                    defaultOption.hidden = true;
+                    defaultOption.disabled = true;
+
+                    blindIdInput.append(defaultOption);
+
+                    data.forEach(blind => {
+                        blindIdInput.append(new Option(blind.name, blind.mac)); // , undefined, blind.mac === this.blindid
+                    });
+
+                    blindIdInput.val(this.blindid);
+                    blindIdInput.change();
+                }).error((err) => {
+                    blindsLoading = false;
+
+                    blindIdInput.empty();
+                    blindIdInput.prop('disabled', true);
+                    blindIdInput.append(new Option("Error Loading Blinds."));
+                });
+            }
+
+            this.loadBlinds();
         }
     });
 </script>
 
 <script type="text/html" data-template-name="soma-smart-shade">
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
-        <label for="node-input-server"><i class="icon-tag"></i> Server</label>
+        <label for="node-input-server"><i class="fa fa-server"></i> Server</label>
         <input type="text" id="node-input-server" placeholder="Server">
+    </div>
+    <div class="form-row">
+        <label for="node-input-blindid"><i class="fa fa-tag"></i> Blind</label>
+        <div style="width: 70%; display: inline-block">
+            <select id="node-input-blindid" style="width: 100%"></select>
+        </div>
     </div>
 </script>
 
