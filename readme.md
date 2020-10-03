@@ -1,9 +1,9 @@
 
 # node-red-contrib-soma-smart-shade
 
-![npm](https://img.shields.io/npm/v/red-contrib-soma-smart-shade)
+![npm](https://img.shields.io/npm/v/node-red-contrib-soma-smart-shade)
 ![Build Status](https://travis-ci.com/Roaders/node-red-contrib-soma-smart-shade.svg?branch=master&status=started)
-![NPM](https://img.shields.io/npm/l/red-contrib-soma-smart-shade)
+![NPM](https://img.shields.io/npm/l/node-red-contrib-soma-smart-shade)
 ![NPM](https://img.shields.io/badge/types-TypeScript-blue)
 
 A node that allows you to control a soma smart shade from Node Red.
