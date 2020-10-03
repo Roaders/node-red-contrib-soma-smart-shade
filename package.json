@@ -1,5 +1,5 @@
 {
-    "name": "red-contrib-soma-smart-shade",
+    "name": "node-red-contrib-soma-smart-shade",
     "version": "1.0.3",
     "description": "Node red node for controlling a soma smart shade",
     "scripts": {
