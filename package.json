@@ -1,6 +1,6 @@
 {
     "name": "red-contrib-soma-smart-shade",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Node red node for controlling a soma smart shade",
     "scripts": {
         "clean": "rimraf dist",
