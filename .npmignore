@@ -1,3 +1,5 @@
 *.ts
 tsconfig.json
 *.tgz
+nodes/
+.gitognore

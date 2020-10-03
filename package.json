@@ -1,5 +1,5 @@
 {
-    "name": "node-red-contrib-soma-smart-shade",
+    "name": "red-contrib-soma-smart-shade",
     "version": "1.0.0",
     "description": "Node red node for controlling a soma smart shade",
     "scripts": {
@@ -15,7 +15,7 @@
             "soma-smart-shade-config": "dist/soma-smart-shade-config.js"
         }
     },
-    "author": "",
+    "author": "Giles Roadnight",
     "license": "ISC",
     "dependencies": {
         "axios": "^0.19.2"
@@ -29,6 +29,17 @@
         "typescript": "^3.9.7"
     },
     "keywords": [
-        "node-red"
-    ]
+        "node-red",
+        "soma",
+        "node",
+        "red"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Roaders/node-red-contrib-soma-smart-shade.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Roaders/node-red-contrib-soma-smart-shade/issues"
+    },
+    "homepage": "https://github.com/Roaders/node-red-contrib-soma-smart-shade#readme"
 }

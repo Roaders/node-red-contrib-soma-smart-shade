@@ -4,14 +4,14 @@
         inputs: 1,
         outputs: 1,
         defaults: {
-            name: {value:"soma-smart-shade"},
+            name: { value:"soma-smart-shade" },
             server: {type:"soma-smart-shade-config", required: true},
             blindid: {validate: function(value) {
                 const regExp = /^(\w{2}:){5}\w{2}$/;
                 return regExp.test(value);
             }}
         },
-        icon: "font-awesome/fa-automobile",
+        icon: "bridge.png",
         label: function() {
             return this.name || "soma-smart-shade";
         },
@@ -98,30 +98,57 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="garage-door">
-    <p>Enables control of the garage door and provides updates on the garage door state</p>
+<script type="text/html" data-help-name="soma-smart-shade">
+    <p>Allows you to control and read the state of a soma smart blind.</p>
 
     <h3>Inputs</h3>
     <dl class="message-properties">
         <dt>payload
-            <span class="property-type">string | boolean</span>
+            <span class="property-type">string | object</span>
         </dt>
-        <dd>true will open the garage door, false will close. Acceptable strings values are "OPEN" or "CLOSED"</dd>
+        <dd>Acceptable values: "open", "close", "stop", "getBattery", "getPosition",  {"action": "open"}, {"action": "setPosition", position: 100}</dd>
     </dl>
+    <ul>
+        <li>For "open", "close", "stop", "getBattery" and "getPosition" just a string can be passed but it is acceptable to pass an object with the "action" property set to one of these values.</li>
+        <li>For "setPosition" an object must be passed with "action" set to "setPosition" and "position" a number between 0 and 100</li>
+    </ul>
 
     <h3>Outputs</h3>
-    <p>Payload properties</p>
     <dl class="message-properties">
-        <dt>status
+        <dt>result
             <span class="property-type">string</span>
         </dt>
-        <p>values: 'OPEN', 'CLOSED', 'OPENING', 'CLOSING' or 'UNKNOWN'</p>
+        <dd>values: 'success' or 'error'.</dd>
     </dl>
-
-    <dl class="message-properties"><dt>isOpen <span class="property-type">boolean</span></dt></dl>
-    <dl class="message-properties"><dt>isClosed <span class="property-type">boolean</span></dt></dl>
-    <dl class="message-properties"><dt>isOpening <span class="property-type">boolean</span></dt></dl>
-    <dl class="message-properties"><dt>isClosing <span class="property-type">boolean</span></dt></dl>
-    <dl class="message-properties"><dt>isUnknown <span class="property-type">boolean</span></dt></dl>
+    <dl class="message-properties">
+        <dt>version
+            <span class="property-type">string</span>
+        </dt>
+        <dd>firmware version of the blind.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>mac
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The mac address of the blind.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>msg
+            <span class="property-type">string</span>
+        </dt>
+        <dd>Only defined if "result" is "error".</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>position
+            <span class="property-type">number</span>
+        </dt>
+        <dd>Only defined if "action" is "getPosition". Number between 0 and 100.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>battery_level
+            <span class="property-type">number</span>
+        </dt>
+        <dd>Only defined if "action" is "getBattery". Number between 320 and 420. Anything below 360 and the motor will not move.</dd>
+    </dl>
 
  </script>
