@@ -49,7 +49,7 @@ All responses will have the following properties:
  * **version** - the firmware version of the blind
  * **mac** - the MAC address of the blind.
 
- ### Additional Properties
+### Additional Properties
 
  * **msg** - the error message if `result` is `error`
  * **position** - position of the blind if `action` is `getPosition`. Numeric value from `0` - `100`.
