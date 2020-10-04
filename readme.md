@@ -46,13 +46,15 @@ All responses will have the following properties:
 {
     "result": "success",
     "version": "2.2.0",
-    "mac": "aa:bb:cc:dd:ee:ff"
+    "mac": "aa:bb:cc:dd:ee:ff",
+    "requestPayload": "open"
 }
 ```
 
  * **result** - `success` or `error`
  * **version** - the firmware version of the blind
  * **mac** - the MAC address of the blind.
+ * **requestPayload** - the original message payload that was sent to the blind. This can be used to retry the action if an error is recieved.
 
 ### Additional Properties
 

@@ -72,7 +72,7 @@ module.exports = function (module: Red) {
             }
 
             axios.get(url).then(result => {
-                msg.payload = result.data;
+                msg.payload = {...result.data, requestPayload: msg.payload};
 
                 send(msg);
             }).catch(err => {

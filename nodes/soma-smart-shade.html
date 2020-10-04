@@ -133,10 +133,16 @@
         <dd>The mac address of the blind.</dd>
     </dl>
     <dl class="message-properties">
-        <dt>msg
+        <dt>mac
             <span class="property-type">string</span>
         </dt>
-        <dd>Only defined if "result" is "error".</dd>
+        <dd>The mac address of the blind.</dd>
+    </dl>
+    <dl class="message-properties">
+        <dt>requestPayload
+            <span class="property-type">string | object</span>
+        </dt>
+        <dd>The original payload that was sent to the blind. Allows action to be replayed if an error is received.</dd>
     </dl>
     <dl class="message-properties">
         <dt>position
